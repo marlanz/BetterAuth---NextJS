@@ -12,8 +12,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { PasswordInput } from "@/components/ui/password-input";
+import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 const signupSchema = z.object({
@@ -34,12 +37,25 @@ export default function SignUpTab() {
     },
   });
 
+  const router = useRouter();
+
   const { isSubmitting } = form.formState;
 
   async function handleSignUp(data: SignUpForm) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     console.log("Form data:", data);
+    await authClient.signUp.email(
+      { ...data, callbackURL: "/" },
+      {
+        onError: (error) => {
+          toast.error(error.error.message || "Failed to sign up");
+        },
+        onSuccess: () => {
+          router.push("/");
+        },
+      },
+    );
   }
 
   return (
