@@ -8,6 +8,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SignInTab from "./_components/signin-form";
 import SignUpTab from "./_components/signup-form";
+import { SocialAuthButtons } from "./_components/social-auth-button";
 
 const LoginPage = () => {
   return (
@@ -31,7 +32,7 @@ const LoginPage = () => {
           </CardContent>
 
           <CardFooter className="grid grid-cols-2 gap-3">
-            <p>social button</p>
+            <SocialAuthButtons />
           </CardFooter>
         </Card>
       </TabsContent>
@@ -47,7 +48,7 @@ const LoginPage = () => {
           </CardContent>
 
           <CardFooter className="grid grid-cols-2 gap-3">
-            <p>social button</p>
+            <SocialAuthButtons />
           </CardFooter>
         </Card>
       </TabsContent>
